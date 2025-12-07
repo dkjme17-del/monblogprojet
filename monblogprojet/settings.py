@@ -8,10 +8,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # -----------------------------
 # Sécurité
 # -----------------------------
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-r*c-%i2on5x5(2mrm*k^@rx(y$qmrrg&%*=ldg2ro6-m3jgd-9')
-DEBUG = False
-ALLOWED_HOSTS = ['www.monblogamoi.com', 'monblogamoi.com'] 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY') 
+DEBUG = config('DEBUG', default=False, cast=bool)
+ALLOWED_HOSTS = ['monblogprojet-1.onrender.com'] 
 SECRET_KEY=config('SECRET_KEY')
 # -----------------------------
 # Applications
@@ -62,9 +60,9 @@ WSGI_APPLICATION = 'monblogprojet.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.parse(
-        'postgresql://dkjme17:KevapFwzzUzxBFWDL1bibTXCnPdj3G2T@dpg-d4qojq3e5dus73es4l40-a.virginia-postgres.render.com/postgress_3n5t',
+        config('DATABASE_URL'),
         conn_max_age=600,
-        ssl_require=True  # ⚠️ SSL obligatoire sur Render
+        ssl_require=True
     )
 }
 
